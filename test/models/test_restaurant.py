@@ -1,5 +1,6 @@
 from src.models.restaurant import Restaurant
 
+
 class TestRestaurant:
 
     restaurant_name = "Ristorante Renatao"
@@ -95,3 +96,16 @@ class TestRestaurant:
         expected_result = f"{self.restaurant_name} está fechado!"
 
         assert restaurant.increment_number_served(PESSOAS_ATENDIDAS) == expected_result
+
+    def test_increment_number_served_valor_negativo(self):
+        restaurant = Restaurant(self.restaurant_name, self.cuisine_type)
+        restaurant.open_restaurant()
+
+        PESSOAS_ATENDIDAS = 2
+        restaurant.set_number_served(PESSOAS_ATENDIDAS)
+
+        expected_result = "Não pode incrementar valores negativos"
+
+        VALOR_INVALIDO = -2
+        assert restaurant.increment_number_served(VALOR_INVALIDO) == expected_result
+        assert restaurant.number_served == PESSOAS_ATENDIDAS
