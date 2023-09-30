@@ -13,7 +13,6 @@ class Restaurant:
         """
         Retorna uma descrição simples da instância do restaurante.
         """
-
         # BUG: o nome do restaurante estava errado
         # BUG: na mensagem havia "restaturante" quando deveria ser "restaurante"
         # BUG: na mensagem havia "and" quando deveria ser "e"
@@ -41,7 +40,6 @@ class Restaurant:
         """
          Retorna uma mensagem indicando que o restaurante está fechado para negócios.
          """
-
         # REFACTORY: retirado "else" porque é a última instrução a ser executada
         # REFACTORY: removido print para adicionar retorno a função
         # REFACTORY: alterado lugar de validação para quando estiver fechado, feedback rápido (logo no início da função)
