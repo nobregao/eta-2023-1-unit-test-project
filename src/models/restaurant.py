@@ -8,38 +8,67 @@ class Restaurant:
         self.open = False
 
     def describe_restaurant(self):
-        """Imprima uma descrição simples da instância do restaurante."""
-        print(f"Esse restaturante chama {self.cuisine_type} and serve {self.cuisine_type}.")
-        print(f"Esse restaturante está servindo {self.number_served} consumidores desde que está aberto.")
+        """
+        Retorna uma descrição simples da instância do restaurante.
+        """
+
+        # BUG: o nome do restaurante estava errado
+        # BUG: na mensagem havia "restaturante" quando deveria ser "restaurante"
+        # BUG: na mensagem havia "and" quando deveria ser "e"
+        # REFACTORY: compiladas mensagens dos prints para removê-las e adicionar a mensagem ao retorno da função
+        return f"Esse restaurante chama {self.restaurant_name} serve {self.cuisine_type} e está servindo {self.number_served} consumidores desde que está aberto."
 
     def open_restaurant(self):
-        """Imprima uma mensagem indicando que o restaurante está aberto para negócios."""
+        """
+        Retorna uma mensagem indicando que o restaurante está aberto para negócios.
+        """
         if not self.open:
-            self.open = False
-            self.number_served = -2
-            print(f"{self.restaurant_name} agora está aberto!")
-        else:
-            print(f"{self.restaurant_name} já está aberto!")
+            # BUG: atributo que indica quando restaurante está aberto estava inicializando com False
+            self.open = True
+            # BUG: number_served estava inicializado com -2 quando deveria estar zero quando abrir restaurante
+            self.number_served = 0
+            # REFACTORY: removido print para adicionar retorno a função
+            return f"{self.restaurant_name} agora está aberto!"
+
+        # REFACTORY: retirado "else" porque é a única instrução a ser executada
+        # REFACTORY: removido print para adicionar retorno da função
+        return f"{self.restaurant_name} já está aberto!"
 
     def close_restaurant(self):
-        """Imprima uma mensagem indicando que o restaurante está fechado para negócios."""
+        """
+         Retorna uma mensagem indicando que o restaurante está fechado para negócios.
+         """
         if self.open:
             self.open = False
             self.number_served = 0
-            print(f"{self.restaurant_name} agora está fechado!")
-        else:
-            print(f"{self.restaurant_name} já está fechado!")
+            # REFACTORY: removido print para adicionar retorno a função
+            return f"{self.restaurant_name} agora está fechado!"
+
+        # REFACTORY: retirado "else" porque é a única instrução a ser executada
+        # REFACTORY: removido print para adicionar retorno a função
+        return f"{self.restaurant_name} já está fechado!"
 
     def set_number_served(self, total_customers):
-        """Defina o número total de pessoas atendidas por este restaurante até o momento."""
+        """
+        Defina o número total de pessoas atendidas por este restaurante até o momento.
+        """
         if self.open:
             self.number_served = total_customers
-        else:
-            print(f"{self.restaurant_name} está fechado!")
+            # REFACTORY: adicionado return a função
+            return f"Agora são {self.number_served} pessoas atendidas por {self.restaurant_name} até o momento!"
+
+        # REFACTORY: retirado "else" porque é a única instrução a ser executada
+        # REFACTORY: removido print para adicionar retorno a função
+        return f"{self.restaurant_name} está fechado!"
 
     def increment_number_served(self, more_customers):
         """Aumenta número total de clientes atendidos por este restaurante."""
         if self.open:
-            self.number_served = more_customers
-        else:
-            print(f"{self.restaurant_name} está fechado!")
+            # BUG: number_served estava sendo alterado e não incrementado com o parâmetro da função
+            self.number_served += more_customers
+            # REFACTORY: adicionado return a função
+            return f"Agora são {self.number_served} pessoas atendidas por {self.restaurant_name} até o momento!"
+
+        # REFACTORY: retirado "else" porque é a única instrução a ser executada
+        # REFACTORY: removido print para adicionar retorno a função
+        return f"{self.restaurant_name} está fechado!"
