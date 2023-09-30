@@ -43,7 +43,6 @@ class IceCreamStand(Restaurant):
 
     def find_flavor(self, flavor):
         """Verifica se o sabor informado está disponível."""
-
         # REFACTORY: retirado último "else" porque é a última instrução a ser executada
         # REFACTORY: removido print para adicionar retorno a função
         # REFACTORY: alterado lugar do retorno que seria do último else para ter feedback rápido (fail first)
