@@ -17,6 +17,23 @@ class TestIceCreamStand:
         "Beiju de Tapioca"
     ]
 
+    def test_flavors_formated_list(self):
+        ice_cream_stand = IceCreamStand(self.restaurant_name, self.cuisine_type, self.flavors_list)
+
+        expected_result = \
+            f""" - Açaí,
+ - Manga Rosa,
+ - Pitanga,
+ - Goiaba Vermelha,
+ - Seriguela,
+ - Rapadura,
+ - Tapioca,
+ - Bolo de Rolo,
+ - Pamonha,
+ - Beiju de Tapioca"""
+
+        assert ice_cream_stand.flavors_formated_list() == expected_result
+
     def test_flavors_available_com_estoque(self):
         ice_cream_stand = IceCreamStand(self.restaurant_name, self.cuisine_type, self.flavors_list)
 

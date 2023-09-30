@@ -4,6 +4,8 @@ from src.models.restaurant import Restaurant
 class IceCreamStand(Restaurant):
     """Um tipo especializado de restaurante."""
 
+    CAMPO_VAZIO = SEM_ESTOQUE = 0
+
     def __init__(self, restaurant_name, cuisine_type, flavors_list):
         """
         Inicialize os atributos da classe pai.
@@ -27,25 +29,25 @@ class IceCreamStand(Restaurant):
         """
         Percorra a lista de sabores disponíveis e retorne.
         """
-        if self.flavors:
-            # REFACTORY: alterado local de formatação da lista para uma função
-            flavor_concatenado = self.flavors_formated_list()
-
-            # REFACTORY: removido print para adicionar retorno a função
-            return f"No momento temos os seguintes sabores de sorvete disponíveis: \n{flavor_concatenado}"
-
         # REFACTORY: retirado "else" porque é a última instrução a ser executada
         # REFACTORY: removido print para adicionar retorno a função
-        return "Estamos sem estoque atualmente!"
+        # REFACTORY: alterado lugar do retorno que seria do último else para ter feedback rápido (fail first)
+        if len(self.flavors) == self.SEM_ESTOQUE:
+            return "Estamos sem estoque atualmente!"
+
+        # REFACTORY: alterado local de formatação da lista para uma função
+        flavor_concatenado = self.flavors_formated_list()
+
+        # REFACTORY: removido print para adicionar retorno a função
+        return f"No momento temos os seguintes sabores de sorvete disponíveis: \n{flavor_concatenado}"
 
     def find_flavor(self, flavor):
         """Verifica se o sabor informado está disponível."""
-        SEM_ESTOQUE = 0
 
         # REFACTORY: retirado último "else" porque é a última instrução a ser executada
         # REFACTORY: removido print para adicionar retorno a função
-        # REFACTORY: alterado lugar do retorno que seria do último else para garantir retorno quando não houver estoque (fail first)
-        if len(self.flavors) == SEM_ESTOQUE:
+        # REFACTORY: alterado lugar do retorno que seria do último else para ter feedback rápido (fail first)
+        if len(self.flavors) == self.SEM_ESTOQUE:
             return "Estamos sem estoque atualmente!"
 
         if flavor in self.flavors:
@@ -61,10 +63,9 @@ class IceCreamStand(Restaurant):
         """Add o sabor informado ao estoque."""
         # REFACTORY: removida validação inicial de estoque para ser posssível adicionar,
         # caso não tenha nenhum estoque de sabores
-        CAMPO_VAZIO = 0
 
         # MELHORIA: validação para caso sabor adicionado seja inválido
-        if len(flavor) == CAMPO_VAZIO:
+        if len(flavor) == self.CAMPO_VAZIO:
             return "Sabor inválido!"
 
         if flavor in self.flavors:

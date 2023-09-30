@@ -1,6 +1,8 @@
 class Restaurant:
     """Model de restaurante simples."""
 
+    QUANTIDADE_INVALIDA = 0
+
     def __init__(self, restaurant_name, cuisine_type):
         self.restaurant_name = restaurant_name.title()
         self.cuisine_type = cuisine_type
@@ -55,8 +57,6 @@ class Restaurant:
         """
         Defina o número total de pessoas atendidas por este restaurante até o momento.
         """
-        QUANTIDADE_INVALIDA = 0
-
         # REFACTORY: retirado "else" porque é a última instrução a ser executada
         # REFACTORY: removido print para adicionar retorno a função
         # REFACTORY: alterado lugar de validação para quando estiver fechado, feedback rápido (logo no início da função)
@@ -64,7 +64,7 @@ class Restaurant:
             return f"{self.restaurant_name} está fechado!"
 
         # MELHORIA: validação para números negativos
-        if total_customers < QUANTIDADE_INVALIDA:
+        if total_customers < self.QUANTIDADE_INVALIDA:
             return "Não pode alterar para valor negativo"
 
         self.number_served = total_customers
@@ -73,8 +73,6 @@ class Restaurant:
 
     def increment_number_served(self, more_customers):
         """Aumenta número total de clientes atendidos por este restaurante."""
-        QUANTIDADE_INVALIDA = 0
-
         # REFACTORY: retirado "else" porque é a última instrução a ser executada
         # REFACTORY: removido print para adicionar retorno a função
         # REFACTORY: alterado lugar de validação para quando estiver fechado, feedback rápido (logo no início da função)
@@ -82,7 +80,7 @@ class Restaurant:
             return f"{self.restaurant_name} está fechado!"
 
         # MELHORIA: validação para números negativos
-        if more_customers < QUANTIDADE_INVALIDA:
+        if more_customers < self.QUANTIDADE_INVALIDA:
             return "Não pode incrementar valores negativos"
 
         # BUG: number_served não estava sendo incrementado. estava apenas alterando para valor do parâmetro
