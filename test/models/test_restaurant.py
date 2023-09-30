@@ -74,6 +74,18 @@ class TestRestaurant:
         assert restaurant.set_number_served(PESSOAS_ATENDIDAS) == expected_result
         assert restaurant.number_served == PESSOAS_ATENDIDAS
 
+    def test_set_number_served_valor_invalido(self):
+        restaurant = Restaurant(self.restaurant_name, self.cuisine_type)
+        restaurant.open_restaurant()
+
+        TOTAL_PESSOAS_ATENDIDAS = 2
+        restaurant.set_number_served(TOTAL_PESSOAS_ATENDIDAS)
+
+        VALOR_INVALIDO_DE_ATENDIMENTO = -5
+
+        assert restaurant.set_number_served(VALOR_INVALIDO_DE_ATENDIMENTO) == "Não pode alterar para valor negativo"
+        assert restaurant.number_served == TOTAL_PESSOAS_ATENDIDAS
+
     def test_increment_number_served_restaurante_aberto(self):
         restaurant = Restaurant(self.restaurant_name, self.cuisine_type)
         restaurant.open_restaurant()
